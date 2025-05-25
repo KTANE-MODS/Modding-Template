@@ -54,12 +54,13 @@ public class ModuleTemplate : MonoBehaviour {
         KTANELogging($"AA Battery Count {AABattaryCount}");
         KTANELogging($"D Battery Count {DBatteryCount}");
         KTANELogging($"Serial Number {serialNumber}");
-        KTANELogging($"Lit Indicators {string.Join(", ", litIndicators)}");
-        KTANELogging($"Unlit Indicators {string.Join(", ", unlitIndicators)}");
+        KTANELogging($"Lit Indicators {Join(litIndicators)}");
+        KTANELogging($"Unlit Indicators {Join(unlitIndicators)}");
         KTANELogging($"There are {portPlates.Length} port plate(s) on the bomb");
+
         for (int i = 0; i < portPlates.Length; i++)
         {
-            KTANELogging($"Port Plate {i + 1} has {string.Join(", ", portPlates[i])}");
+            KTANELogging($"Port Plate {i + 1} has {Join(portPlates[i])}");
         }
        
         //if edgework is required to solve the module, start calculations here.
@@ -98,6 +99,17 @@ public class ModuleTemplate : MonoBehaviour {
     private void KTANELogging(string s)
     {
         Debug.Log($"[{moduleName} #{ModuleId}] {s}");
+    }
+
+    /// <summary>
+    /// Helpe method to join a collection of strings into a single string
+    /// </summary>
+    /// <param name="collection">the collections of strings</param>
+    /// <param name="separator">the string that will be between each item of the collection. Default is ", "</param>
+    /// <returns></returns>
+    private string Join(IEnumerable<string> collection, string separator = ", ")
+    { 
+        return string.Join(separator, collection.ToArray());
     }
 
     #pragma warning disable 414
